@@ -19,6 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: recursive
 
       - name: Build
@@ -30,5 +31,6 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v7
         with:
+          if-no-files-found: error
           name: windows-mxe
           path: artifacts/
