@@ -4,7 +4,8 @@
 #       It works fine when using the image locally.
 export PATH="/mxe/usr/bin:${PATH}"
 
-mkdir build && cd build
+mkdir -p build
+cd build
 
 if [ "$GITHUB_REF_TYPE" == "tag" ]; then
 	export EXTRA_CMAKE_FLAGS=(-DENABLE_QT_UPDATE_CHECKER=ON)
