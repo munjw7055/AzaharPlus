@@ -527,4 +527,13 @@ else()
 endif()
 
 set(ENABLE_OPENSSL OFF CACHE BOOL "" FORCE)
+
+# libzip expects the namespaced target exported by a system Zstandard package.
+# AzaharPlus builds Zstandard from its bundled source instead, where the
+# equivalent target is named libzstd_static. Expose that target under the name
+# libzip expects so MXE does not try to link a non-existent system static target.
+if(TARGET libzstd_static AND NOT TARGET zstd::libzstd_static)
+    add_library(zstd::libzstd_static ALIAS libzstd_static)
+endif()
+
 add_subdirectory(libzip EXCLUDE_FROM_ALL)
